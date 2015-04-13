@@ -191,9 +191,14 @@ int main() {
     AD1CON3bits.ADCS = 3;
     AD1CHSbits.CH0SA = 0;
     AD1CON1bits.ADON = 1;
-
+//set up RB10 pin as a digital output to power OLED
+    TRISBbits.TRISB10 = 0;
+    LATBbits.LATB10 = 1;
            __builtin_enable_interrupts();
            // </editor-fold>
+        _CP0_SET_COUNT(0);
+        while(_CP0_GET_COUNT()<2000000){LATBbits.LATB10 = 0;/*wait 0.1sec*/}
+        LATBbits.LATB10 = 1;
         display_init();
         display_clear();
         char message[20];
