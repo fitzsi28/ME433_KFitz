@@ -5,6 +5,7 @@
 #include "i2c_display.h"
 #include "i2c_master_int.h"
 
+
 //Wiring choices
 //A0 for AN0, B7 for LED1, B13 for USER, and B15 for OC1/LED2
 
@@ -192,13 +193,15 @@ int main() {
     AD1CHSbits.CH0SA = 0;
     AD1CON1bits.ADON = 1;
 //set up RB10 pin as a digital output to power OLED
-    TRISBbits.TRISB10 = 0;
-    LATBbits.LATB10 = 1;
+    TRISBbits.TRISB4 = 0;
+    LATBbits.LATB4 = 0;
            __builtin_enable_interrupts();
            // </editor-fold>
         _CP0_SET_COUNT(0);
-        while(_CP0_GET_COUNT()<2000000){LATBbits.LATB10 = 0;/*wait 0.1sec*/}
-        LATBbits.LATB10 = 1;
+        LATBbits.LATB4 = 1;
+        while(_CP0_GET_COUNT()<2000000){/*wait 0.1sec*/}
+        
+
         display_init();
         display_clear();
         char message[20];
