@@ -2,12 +2,12 @@
 #include <xc.h>
 // interface with the LSM303D accelerometer/magnetometer using spi
 // Wire GND to GND, VDD to 3.3V, 
-// SDO1(RB5)             -> SDI (labeled SDA),
-// SDI1 (RA1)             -> SDO
+// SDO1(RB2)             -> SDI (labeled SDA),
+// SDI1 (RB5)             -> SDO
 // SCK1 (B14)       -> SCL
-// some digital pin -> CS
+// some digital pin -> CS (RB3
 
-#define CS LATBbits.LATB2 // replace x with some digital pin
+#define CS LATBbits.LATB3 // replace x with some digital pin
 
 // send a byte via spi and return the response
 unsigned char spi_io(unsigned char o) {
@@ -45,15 +45,14 @@ void acc_write_register(unsigned char reg, unsigned char data) {
 
 
 void acc_setup() {
-  ANSELBbits.ANSB2 = 0;
-  TRISBbits.TRISB2 = 0; // set CS to output and digital if necessary
+  TRISBbits.TRISB3 = 0; // set CS to output and digital if necessary
   CS = 1;
 
   // select a pin for SDI1
-  SDI1Rbits.SDI1R = 0b0000;
+  SDI1Rbits.SDI1R = 0b0001;
 
   // select a pin for SD01
-  RPB5Rbits.RPB5R = 0b0011;
+    RPB2Rbits.RPB2R = 0b0011;
 
   // Setup the master Master - SPI1
   // we manually control SS as a digital output 
@@ -78,6 +77,6 @@ void acc_setup() {
   // enable continuous reading of the magnetometer
   acc_write_register(CTRL7, 0x0);
   //set accelerometer
-  acc_write_register(CTRL2,0x0);
+  //acc_write_register(CTRL2,0x0);
 }
 

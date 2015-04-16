@@ -207,6 +207,7 @@ int main() {
         char message[100];
         acc_setup();
         short accels[3]={1, 2, 3};
+        int accelvec[2];
         short mags[3];
         short temp;
         // read the accelerometer from all three axes
@@ -225,20 +226,51 @@ while (1) {
 
       acc_read_register(TEMP_OUT_L, (unsigned char *) &temp, 2);
 
-      
-        sprintf(message,"%d, %d, %d", accels[0], accels[1],temp);
-        display_message_i(15,30,message);
-        
-        display_draw();
+      //display_clear;
+             //x acceleration
+      display_clear();
+            int l, d;
+            //y acceleration
+            if(accels[1]>0){
+              for (l=32; l<(33+accels[1]*16/16000.0); l++){
+                for(d=-2;d<3;d++){
+                    display_pixel_set(l,64+d,1);
+                }
+              }
+            }
+            else{
+              for (l=32; l>(33+accels[1]*16/16000.0); l--){
+                for(d=-2;d<3;d++){
+                    display_pixel_set(l,64+d,1);
+                }
+              }
 
+            }
+            //x acceleration
+            if(accels[0]>0){
+              for (l=64;l<65+accels[0]*32/16000.0;l++){
+                for (d=-2;d<3;d++){
+                    display_pixel_set(32+d,l,1);
+                }
+              }
+            }
+            else{
+              for (l=64;l>65+accels[0]*32/16000.0;l--){
+                for (d=-2;d<3;d++){
+                    display_pixel_set(32+d,l,1);
+                }
+              }
 
+            }
+//      sprintf(message,"%3.2f, %3.2f, %3.2f",accels[0]/16000.0,accels[1]/16000.0,accels[2]/16000.0);
+//      display_message_i(5,5, message);
+      display_draw();
 
-
-        
-           if(!PORTBbits.RB13) LATBbits.LATB7=1;
+                
+           if(!PORTBbits.RB13) {LATBbits.LATB7=1;display_clear();}
            else LATBbits.LATB7 = 0;
 
-        }
+   }
 
         // <editor-fold defaultstate="collapsed" desc="LED code">
  //        __builtin_disable_interrupts();
