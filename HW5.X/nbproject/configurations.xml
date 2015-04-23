@@ -13,12 +13,12 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>accel.h</itemPath>
-      <itemPath>hw3.c</itemPath>
       <itemPath>i2c_master_int.c</itemPath>
       <itemPath>i2c_master_int.h</itemPath>
       <itemPath>spi_accel.c</itemPath>
       <itemPath>i2c_display.c</itemPath>
       <itemPath>i2c_display.h</itemPath>
+      <itemPath>hw5.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

@@ -45,17 +45,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=hw3.c i2c_master_int.c spi_accel.c i2c_display.c
+SOURCEFILES_QUOTED_IF_SPACED=i2c_master_int.c spi_accel.c i2c_display.c hw5.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/hw3.o ${OBJECTDIR}/i2c_master_int.o ${OBJECTDIR}/spi_accel.o ${OBJECTDIR}/i2c_display.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/hw3.o.d ${OBJECTDIR}/i2c_master_int.o.d ${OBJECTDIR}/spi_accel.o.d ${OBJECTDIR}/i2c_display.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/i2c_master_int.o ${OBJECTDIR}/spi_accel.o ${OBJECTDIR}/i2c_display.o ${OBJECTDIR}/hw5.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/i2c_master_int.o.d ${OBJECTDIR}/spi_accel.o.d ${OBJECTDIR}/i2c_display.o.d ${OBJECTDIR}/hw5.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/hw3.o ${OBJECTDIR}/i2c_master_int.o ${OBJECTDIR}/spi_accel.o ${OBJECTDIR}/i2c_display.o
+OBJECTFILES=${OBJECTDIR}/i2c_master_int.o ${OBJECTDIR}/spi_accel.o ${OBJECTDIR}/i2c_display.o ${OBJECTDIR}/hw5.o
 
 # Source Files
-SOURCEFILES=hw3.c i2c_master_int.c spi_accel.c i2c_display.c
+SOURCEFILES=i2c_master_int.c spi_accel.c i2c_display.c hw5.c
 
 
 CFLAGS=
@@ -94,12 +94,6 @@ endif
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/hw3.o: hw3.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/hw3.o.d 
-	@${RM} ${OBJECTDIR}/hw3.o 
-	@${FIXDEPS} "${OBJECTDIR}/hw3.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/hw3.o.d" -o ${OBJECTDIR}/hw3.o hw3.c   
-	
 ${OBJECTDIR}/i2c_master_int.o: i2c_master_int.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/i2c_master_int.o.d 
@@ -118,13 +112,13 @@ ${OBJECTDIR}/i2c_display.o: i2c_display.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/i2c_display.o 
 	@${FIXDEPS} "${OBJECTDIR}/i2c_display.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/i2c_display.o.d" -o ${OBJECTDIR}/i2c_display.o i2c_display.c   
 	
-else
-${OBJECTDIR}/hw3.o: hw3.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/hw5.o: hw5.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/hw3.o.d 
-	@${RM} ${OBJECTDIR}/hw3.o 
-	@${FIXDEPS} "${OBJECTDIR}/hw3.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/hw3.o.d" -o ${OBJECTDIR}/hw3.o hw3.c   
+	@${RM} ${OBJECTDIR}/hw5.o.d 
+	@${RM} ${OBJECTDIR}/hw5.o 
+	@${FIXDEPS} "${OBJECTDIR}/hw5.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/hw5.o.d" -o ${OBJECTDIR}/hw5.o hw5.c   
 	
+else
 ${OBJECTDIR}/i2c_master_int.o: i2c_master_int.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/i2c_master_int.o.d 
@@ -142,6 +136,12 @@ ${OBJECTDIR}/i2c_display.o: i2c_display.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/i2c_display.o.d 
 	@${RM} ${OBJECTDIR}/i2c_display.o 
 	@${FIXDEPS} "${OBJECTDIR}/i2c_display.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/i2c_display.o.d" -o ${OBJECTDIR}/i2c_display.o i2c_display.c   
+	
+${OBJECTDIR}/hw5.o: hw5.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/hw5.o.d 
+	@${RM} ${OBJECTDIR}/hw5.o 
+	@${FIXDEPS} "${OBJECTDIR}/hw5.o.d" $(SILENT) -rsi ${MP_CC_DIR}../  -c ${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/hw5.o.d" -o ${OBJECTDIR}/hw5.o hw5.c   
 	
 endif
 

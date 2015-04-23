@@ -2,12 +2,16 @@
 *.pcd
 *.o
 *.o.d
+DEVCFG.*
+PIC32book
+PIC32DS.pdf
 
 # ignore these directories and the files in them.
 *~
 bin/
 build/
 data/
+hidapi/
 
 *TAGS
 
