@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/opt/microchip/harmony/apps/examples/peripheral/ports/blinky_leds_KF/firmware/src/app.h</file>
+        <file>file:/opt/microchip/harmony/apps/examples/peripheral/ports/blinky_leds_KF/firmware/src/app.c</file>
+        <file>file:/opt/microchip/harmony/apps/examples/peripheral/ports/blinky_leds_KF/firmware/src/system_config/pic32mx_eth_sk/system_config.h</file>
+        <file>file:/opt/microchip/harmony/bsp/pic32mx_eth_sk2/bsp_config.h</file>
+        <file>file:/opt/microchip/harmony/apps/examples/peripheral/ports/blinky_leds_KF/firmware/src/main.c</file>
+        <file>file:/opt/microchip/harmony/apps/examples/peripheral/ports/blinky_leds_KF/firmware/src/system_config/pic32mx_eth_sk/system_init.c</file>
+        <file>file:/opt/microchip/harmony/apps/examples/peripheral/ports/blinky_leds_KF/firmware/src/system_config/pic32mx_eth_sk/system_interrupt.c</file>
+        <file>file:/opt/microchip/harmony/apps/examples/peripheral/ports/blinky_leds_KF/firmware/src/system_config/pic32mx_eth_sk/system_tasks.c</file>
+        <file>file:/opt/microchip/harmony/bsp/pic32mx_eth_sk2/bsp_sys_init.c</file>
+        <file>file:/opt/microchip/harmony/framework/system/ports/src/sys_ports.c</file>
+        <file>file:/opt/microchip/harmony/apps/examples/peripheral/ports/blinky_leds_KF/firmware/src/system_config/pic32mx_eth_sk/framework/system/ports/src/sys_ports_static.c</file>
+    </open-files>
+</project-private>
