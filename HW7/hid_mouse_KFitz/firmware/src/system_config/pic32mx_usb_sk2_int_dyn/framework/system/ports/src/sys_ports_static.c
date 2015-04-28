@@ -20,7 +20,6 @@ void SYS_PORTS_Initialize(void)
     _CP0_SET_COUNT(0);
      LATBbits.LATB4 = 1;
      while(_CP0_GET_COUNT()<2000000){/*wait 0.1sec*/}
-    //PLIB_PORTS_OpenDrainEnable(PORTS_ID_0, PORT_CHANNEL_B, SYS_PORT_D_ODC);
     
 }
 

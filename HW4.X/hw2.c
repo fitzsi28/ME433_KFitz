@@ -172,7 +172,7 @@ int main() {
     TRISBbits.TRISB13 = 1;
     // set up LED1 pin as a digital output
     TRISBbits.TRISB7 = 0;
-    LATBbits.LATB7 = 0;
+    LATBbits.LATB7 = 1;
     // set up LED2 as OC1 using Timer2 at 1kHz
     ANSELBbits.ANSB15 = 0;
     RPB15Rbits.RPB15R = 0b0101;
@@ -192,13 +192,14 @@ int main() {
     AD1CON3bits.ADCS = 3;
     AD1CHSbits.CH0SA = 0;
     AD1CON1bits.ADON = 1;
-//set up RB10 pin as a digital output to power OLED
-    TRISBbits.TRISB4 = 0;
-    LATBbits.LATB4 = 0;
+//set up RA4 pin as a digital output to power OLED
+    RPA4Rbits.RPA4R = 0b000;
+    TRISAbits.TRISA4 = 0;
+    LATAbits.LATA4 = 0;
            __builtin_enable_interrupts();
            // </editor-fold>
         _CP0_SET_COUNT(0);
-        LATBbits.LATB4 = 1;
+        LATAbits.LATA4 = 1;
         while(_CP0_GET_COUNT()<2000000){/*wait 0.1sec*/}
         
 

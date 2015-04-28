@@ -39,6 +39,8 @@
 int readADC(void);
 
 int main() {
+ // <editor-fold defaultstate="collapsed" desc="SETUP">
+/* ***********************SETUP here ********************** */
 
     // startup
     __builtin_disable_interrupts();
@@ -60,14 +62,12 @@ INTCONbits.MVEC = 0x1;
 // disable JTAG to be able to use TDI, TDO, TCK, TMS as digital
 DDPCONbits.JTAGEN = 0;
 
-__builtin_enable_interrupts();
-
     // set up USER pin as input
     ANSELBbits.ANSB13 = 0;
     TRISBbits.TRISB13 = 1;
     // set up LED1 pin as a digital output
     TRISBbits.TRISB7 = 0;
-    LATBbits.LATB7 = 0;
+    LATBbits.LATB7 = 1;
     // set up LED2 as OC1 using Timer2 at 1kHz
     ANSELBbits.ANSB15 = 0;
     RPB15Rbits.RPB15R = 0b0101;
@@ -76,8 +76,8 @@ __builtin_enable_interrupts();
     PR2 = 2499;              // set period register-20kHz
     TMR2 = 0;                // initialize count to 0
     OC1CONbits.OCM = 0b110;  // PWM mode without fault pin; other OC1CON bits are defaults
-    OC1CONbits.OCTSEL=0;     // Timer select bit or output compare 1 
-    OC1RS = 2000;            // set duty cycle = OC1RS/(PR3+1) = 50%
+    OC1CONbits.OCTSEL=0;     // Timer select bit for output compare 1
+    OC1RS = 2000;            // set duty cycle = OC1RS/(PR2+1) = 50%
     OC1R = 2000;             // initialize before turning OC1 on; afterward it is read-only
     T2CONbits.ON = 1;        // turn on Timer3
     OC1CONbits.ON = 1;       // turn on OC1
@@ -87,7 +87,21 @@ __builtin_enable_interrupts();
     AD1CON3bits.ADCS = 3;
     AD1CHSbits.CH0SA = 0;
     AD1CON1bits.ADON = 1;
+    //set up RA4 pin as a digital output to power OLED
+    RPA4Rbits.RPA4R = 0b000;
+    TRISAbits.TRISA4 = 0;
+    LATAbits.LATA4 = 0;
+ __builtin_enable_interrupts();
+   _CP0_SET_COUNT(0);
+        LATAbits.LATA4 = 1;
+        while(_CP0_GET_COUNT()<2000000){/*wait 0.1sec*/}
+           // </editor-fold>
+
+    display_init();
+    display_clear();
+    char message[20];
     int val;
+
     while (1) {
     _CP0_SET_COUNT(0); // set core timer to 0, remember it counts at half the CPU clock
     LATBINV = 0x80; // invert  pin B7
@@ -95,7 +109,10 @@ __builtin_enable_interrupts();
    // wait for half a second, setting LED brightness to pot angle while waiting
     while (_CP0_GET_COUNT() < 10000000) {
         val = readADC();
-        OC1RS = val * OC1R/1023;
+        sprintf(message," %d",(val*(PR2+1)/1023));
+        display_message_i(28,32,message);
+        display_draw();
+        OC1RS = val * (PR2+1)/1023;
         if (PORTBbits.RB13 == 1) {
         // LATBbits.LATB7 = 0;
      } else {
