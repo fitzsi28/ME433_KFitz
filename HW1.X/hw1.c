@@ -67,7 +67,7 @@ DDPCONbits.JTAGEN = 0;
     TRISBbits.TRISB13 = 1;
     // set up LED1 pin as a digital output
     TRISBbits.TRISB7 = 0;
-    LATBbits.LATB7 = 1;
+    //LATBbits.LATB7 = 1;
     // set up LED2 as OC1 using Timer2 at 1kHz
     ANSELBbits.ANSB15 = 0;
     RPB15Rbits.RPB15R = 0b0101;
@@ -77,8 +77,8 @@ DDPCONbits.JTAGEN = 0;
     TMR2 = 0;                // initialize count to 0
     OC1CONbits.OCM = 0b110;  // PWM mode without fault pin; other OC1CON bits are defaults
     OC1CONbits.OCTSEL=0;     // Timer select bit for output compare 1
-    OC1RS = 2000;            // set duty cycle = OC1RS/(PR2+1) = 50%
-    OC1R = 2000;             // initialize before turning OC1 on; afterward it is read-only
+    OC1RS = 1000;            // set duty cycle = OC1RS/(PR2+1) = 50%
+    OC1R = 1000;             // initialize before turning OC1 on; afterward it is read-only
     T2CONbits.ON = 1;        // turn on Timer3
     OC1CONbits.ON = 1;       // turn on OC1
 //********End PWM Set up*******
@@ -92,14 +92,14 @@ DDPCONbits.JTAGEN = 0;
     TRISAbits.TRISA4 = 0;
     LATAbits.LATA4 = 0;
  __builtin_enable_interrupts();
-   _CP0_SET_COUNT(0);
-        LATAbits.LATA4 = 1;
-        while(_CP0_GET_COUNT()<2000000){/*wait 0.1sec*/}
-           // </editor-fold>
-
-    display_init();
-    display_clear();
-    char message[20];
+//   _CP0_SET_COUNT(0);
+//        LATAbits.LATA4 = 1;
+//        while(_CP0_GET_COUNT()<2000000){/*wait 0.1sec*/}
+//           // </editor-fold>
+//
+//    display_init();
+//    display_clear();
+//    char message[20];
     int val;
 
     while (1) {
@@ -109,9 +109,9 @@ DDPCONbits.JTAGEN = 0;
    // wait for half a second, setting LED brightness to pot angle while waiting
     while (_CP0_GET_COUNT() < 10000000) {
         val = readADC();
-        sprintf(message," %d",(val*(PR2+1)/1023));
-        display_message_i(28,32,message);
-        display_draw();
+//        sprintf(message," %d",(val*(PR2+1)/1023));
+//        display_message_i(28,32,message);
+//        display_draw();
         OC1RS = val * (PR2+1)/1023;
         if (PORTBbits.RB13 == 1) {
         // LATBbits.LATB7 = 0;
