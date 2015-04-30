@@ -2,6 +2,7 @@
 
 #include "system_definitions.h"
 #include "app.h"
+#include"accel.h"
 
 
 /* Recieve data buffer */
@@ -10,6 +11,7 @@ uint8_t receiveDataBuffer[64] APP_MAKE_BUFFER_DMA_READY;
 /* Transmit data buffer */
 uint8_t  transmitDataBuffer[64] APP_MAKE_BUFFER_DMA_READY;
 
+int last_tick;
 
 APP_DATA appData;
 
@@ -268,9 +270,9 @@ void APP_Tasks (void )
                         int row = appData.receiveDataBuffer[1];
                         int i;
                         for (i=0;i<25;i++){message[i]= receiveDataBuffer[i+2];}
+                        display_clear();
+                        display_draw();
                         display_message_i(row,20,message);
-                        sprintf(message,"Hello! %d", row);
-                        display_message_i(row,32,message);
                         display_draw();
 
                         appData.hidDataReceived = false;
@@ -282,23 +284,22 @@ void APP_Tasks (void )
                         break;
 
                     case 0x81:
-
+                        
                         if(appData.hidDataTransmitted)
                         {
-                            /* Echo back to the host PC the command we are fulfilling in
-                             * the first byte.  In this case, the Get Push-button State
-                             * command. */
-
+                            if(_CP0_GET_COUNT()-last_tick > 2000000){
                             appData.transmitDataBuffer[0] = 0x81;
-
-                            if( BSP_SwitchStateGet(APP_USB_SWITCH_1) == BSP_SWITCH_STATE_PRESSED )
-                            {
-                                appData.transmitDataBuffer[1] = 0x00;
+                            acc_read_register(OUT_X_L_A, (unsigned char *) appData.transmitDataBuffer+1, 6);
+                            last_tick = _CP0_GET_COUNT();
                             }
-                            else
-                            {
-                                appData.transmitDataBuffer[1] = 0x01;
-                            }
+//                            if( BSP_SwitchStateGet(APP_USB_SWITCH_1) == BSP_SWITCH_STATE_PRESSED )
+//                            {
+//                                appData.transmitDataBuffer[1] = 0x00;
+//                            }
+//                            else
+//                            {
+//                                appData.transmitDataBuffer[1] = 0x01;
+//                            }
 
                             appData.hidDataTransmitted = false;
 
