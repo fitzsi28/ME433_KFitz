@@ -11,7 +11,7 @@ uint8_t receiveDataBuffer[64] APP_MAKE_BUFFER_DMA_READY;
 /* Transmit data buffer */
 uint8_t  transmitDataBuffer[64] APP_MAKE_BUFFER_DMA_READY;
 
-int last_tick;
+//int MAF[5]=[0,0,0,0,0];
 
 APP_DATA appData;
 
@@ -284,22 +284,23 @@ void APP_Tasks (void )
                         break;
 
                     case 0x81:
-                        
+                        ;
+                        short accels[3];
+                        static int MAF[5];
+                        short avg;
                         if(appData.hidDataTransmitted)
                         {
-                            if(_CP0_GET_COUNT()-last_tick > 400000){
+                            if(_CP0_GET_COUNT() > 800000){
                             appData.transmitDataBuffer[0] = 0x81;
-                            acc_read_register(OUT_X_L_A, (unsigned char *) appData.transmitDataBuffer+1, 6);
-                            last_tick = _CP0_GET_COUNT();
+                            acc_read_register(OUT_X_L_A, (unsigned char *) accels, 6);
+                            _CP0_SET_COUNT(0);
+                            for (i=3;i>=0;i--){MAF[i+1]=MAF[i];}
+                            MAF[0] = accels[2];
+                            avg = (MAF[0]+MAF[1]+MAF[2]+MAF[3]+MAF[4])/5;
+                            appData.transmitDataBuffer[1] = avg & 0xff;
+                            appData.transmitDataBuffer[2]= avg >>8;
                             }
-//                            if( BSP_SwitchStateGet(APP_USB_SWITCH_1) == BSP_SWITCH_STATE_PRESSED )
-//                            {
-//                                appData.transmitDataBuffer[1] = 0x00;
-//                            }
-//                            else
-//                            {
-//                                appData.transmitDataBuffer[1] = 0x01;
-//                            }
+                        
 
                             appData.hidDataTransmitted = false;
 

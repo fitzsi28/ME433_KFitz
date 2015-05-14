@@ -1,0 +1,3 @@
+[submodule "/home/kt-fitz/ME433_KFitz/HW11/hid_basic_KFitz/firmware/hidapi"]
+	path = /home/kt-fitz/ME433_KFitz/HW11/hid_basic_KFitz/firmware/hidapi
+	url = git://github.com/fitzsi28/ME433_KFitz.git
