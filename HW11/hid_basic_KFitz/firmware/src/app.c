@@ -286,9 +286,10 @@ void APP_Tasks (void )
                     case 0x81:
                         ;
                         short accels[3];
-                        static int MAF[5];
-                        short avg;
-                        if(appData.hidDataTransmitted)
+                        static short MAF[5];
+                        static short FIR[12];
+                        short avg, favg;
+                         if(appData.hidDataTransmitted)
                         {
                             if(_CP0_GET_COUNT() > 800000){
                             appData.transmitDataBuffer[0] = 0x81;
@@ -296,9 +297,16 @@ void APP_Tasks (void )
                             _CP0_SET_COUNT(0);
                             for (i=3;i>=0;i--){MAF[i+1]=MAF[i];}
                             MAF[0] = accels[2];
+                            for (i=10;i>=0;i--){FIR[i+1]=FIR[i];}
+                            FIR[0] = accels[2];
                             avg = (MAF[0]+MAF[1]+MAF[2]+MAF[3]+MAF[4])/5;
-                            appData.transmitDataBuffer[1] = avg & 0xff;
-                            appData.transmitDataBuffer[2]= avg >>8;
+                            favg = (5*FIR[0]+5*FIR[1]+5*FIR[2]+5*FIR[3]+5*FIR[4]+5*FIR[5]+5*FIR[6]+5*FIR[7]+5*FIR[8]+5*FIR[9]+4*FIR[10]+4*FIR[11])/58;
+                            appData.transmitDataBuffer[1] = accels[2] & 0xff;
+                            appData.transmitDataBuffer[2]= accels[2] >>8;
+                            appData.transmitDataBuffer[3] = avg & 0xff;
+                            appData.transmitDataBuffer[4]= avg >>8;
+                            appData.transmitDataBuffer[5] = favg & 0xff;
+                            appData.transmitDataBuffer[6]= favg >>8;
                             }
                         
 

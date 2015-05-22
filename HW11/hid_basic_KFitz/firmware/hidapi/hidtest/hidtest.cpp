@@ -73,17 +73,21 @@ int main(int argc, char* argv[])
         FILE *ofp;
 
        ofp = fopen("accels.txt", "w");
+       fprintf(ofp,"z\tzfir\tzmaf\n");
        
-       short z[DATAPNTS];
+       short z[DATAPNTS], zmaf[DATAPNTS], zfir[DATAPNTS];
        for (i=0; i<DATAPNTS; i++) {
         buf[0] = 0x0;
 	buf[1] = 0x81;
 	res = hid_write(handle, buf, 65);
         res = hid_read(handle, buf, 65);
         z[i] = (buf[2]<<8)|(buf[1]&0xff);
+        zmaf[i] = (buf[4]<<8)|(buf[3]&0xff);
+        zfir[i] = (buf[6]<<8)|(buf[5]&0xff);
+
         
 
-       fprintf(ofp,"%f\n",(z[i]/16000.0));
+       fprintf(ofp,"%f\t%f\t%f\n",(z[i]/16000.0),(zmaf[i]/16000.0),(zfir[i]/16000.0));
 
        }
 

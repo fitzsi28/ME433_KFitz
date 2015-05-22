@@ -13,7 +13,7 @@ axis([-0.05 1.05 -0.1*max(mag) max(mag)+0.1*max(mag)]);
 xlabel('Frequency (as fraction of Nyquist frequency)');
 ylabel('Magnitude');
 title('Single-Sided FFT Magnitude');
-set(gca,'FontSize',14);
+set(gca,'FontSize',12);
 
 end
 
