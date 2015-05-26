@@ -50,10 +50,7 @@ int main(int argc, char* argv[])
         for (i=0; i<25; i++){
           buf[i+3] =message[i];
         }
-        // Print out the returned buffer.
-//	for (i = 0; i < 10; i++)
-//		wprintf(L"buf[%d]: %c\n", i, buf[i]);
-
+       
 	res = hid_write(handle, buf, 65);
 
 	// Request state (cmd 0x81). The first byte is the report number (0x0).

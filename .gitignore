@@ -11,6 +11,7 @@ PIC32DS.pdf
 bin/
 build/
 data/
+hidapi/
 
 
 *TAGS
