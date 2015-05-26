@@ -1,6 +1,7 @@
 #include<xc.h> // processor SFR definitions
 #include<sys/attribs.h> // __ISR macro
 
+// <editor-fold defaultstate="collapsed" desc="DEVCFG">
 // DEVCFG0
 #pragma config DEBUG = OFF // no debugging
 #pragma config JTAGEN = OFF // no jtag
@@ -35,6 +36,7 @@
 #pragma config IOL1WAY = ON // not multimple reconfiguration, check this
 #pragma config FUSBIDIO = ON // USB pins controlled by USB module
 #pragma config FVBUSONIO = ON // controlled by USB module
+//           // </editor-fold>
 
 int readADC(void);
 
@@ -96,10 +98,7 @@ DDPCONbits.JTAGEN = 0;
 //        LATAbits.LATA4 = 1;
 //        while(_CP0_GET_COUNT()<2000000){/*wait 0.1sec*/}
 //           // </editor-fold>
-//
-//    display_init();
-//    display_clear();
-//    char message[20];
+
     int val;
 
     while (1) {
@@ -109,9 +108,6 @@ DDPCONbits.JTAGEN = 0;
    // wait for half a second, setting LED brightness to pot angle while waiting
     while (_CP0_GET_COUNT() < 10000000) {
         val = readADC();
-//        sprintf(message," %d",(val*(PR2+1)/1023));
-//        display_message_i(28,32,message);
-//        display_draw();
         OC1RS = val * (PR2+1)/1023;
         if (PORTBbits.RB13 == 1) {
         // LATBbits.LATB7 = 0;
