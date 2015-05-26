@@ -130,62 +130,62 @@ DDPCONbits.JTAGEN = 0;
     while (_CP0_GET_COUNT() < 80000000) {
         LED2 = 1;
         RDIR = RFOR;
-        OC1RS = 50 * (PR2+1)/100;
-        LATBbits.LATB14 = 0;
-        OC3RS = 45 * (PR2+1)/100;
+        RPWM = 50 * (PR2+1)/100;
+        LDIR = LFOR;
+        LPWM = 45 * (PR2+1)/100;
      }
    _CP0_SET_COUNT(0);
    while (_CP0_GET_COUNT() < 80000000) { //forward at full speed
         LED2 = 1;
-        LATAbits.LATA4 = 1;
-        OC1RS = 100* (PR2+1)/100;
-        LATBbits.LATB14 = 0;
+        RDIR = RFOR;
+        RPWM = 100* (PR2+1)/100;
+        LDIR = LFOR;
         OC3RS = 95 * (PR2+1)/100;
      }
    _CP0_SET_COUNT(0);
    while (_CP0_GET_COUNT() < 80000000) { //backward at half speed
         LED2 = 0;
         LED1 = 1;
-        LATAbits.LATA4 = 0;
-        OC1RS = 50 * (PR2+1)/100;
-        LATBbits.LATB14 = 1;
-        OC3RS = 38 * (PR2+1)/100;
+        RDIR = RREV;
+        RPWM = 50 * (PR2+1)/100;
+        LDIR = LREV;
+        LPWM = 38 * (PR2+1)/100;
      }
    _CP0_SET_COUNT(0);
    while (_CP0_GET_COUNT() < 80000000) { //turn right
         LED2 = 1;
         LED1 = 1;
-        LATAbits.LATA4 = 1;
-        OC1RS = 0 * (PR2+1)/100;
-        LATBbits.LATB14 = 0;
-        OC3RS = 50 * (PR2+1)/100; //left
+        RDIR = RFOR;
+        RPWM = 0 * (PR2+1)/100;
+        LDIR = LFOR;
+        LPWM = 50 * (PR2+1)/100; //left
      }
    _CP0_SET_COUNT(0);
    while (_CP0_GET_COUNT() < 80000000) { //turn left
         LED2 = 1;
         LED1 = 1;
-        LATAbits.LATA4 = 1;
-        OC1RS = 50 * (PR2+1)/100;//right
-        LATBbits.LATB14 = 0;
-        OC3RS = 0 * (PR2+1)/100;
+        RDIR = RFOR;
+        RPWM = 50 * (PR2+1)/100;//right
+        LDIR = LFOR;
+        LPWM = 0 * (PR2+1)/100;
      }
    _CP0_SET_COUNT(0);
    while (_CP0_GET_COUNT() < 80000000) { //turn clockwise
         LED2 = 1;
         LED1 = 1;
-        LATAbits.LATA4 = 1;
-        OC1RS = 50 * (PR2+1)/100;//right
-        LATBbits.LATB14 = 1;
-        OC3RS = 50 * (PR2+1)/100;
+        RDIR = RFOR;
+        RPWM = 50 * (PR2+1)/100;//right
+        LDIR = LREV;
+        LPWM = 50 * (PR2+1)/100;
      }
    _CP0_SET_COUNT(0);
    while (_CP0_GET_COUNT() < 80000000) { //turn counterclockwise
         LED2 = 1;
         LED1 = 1;
-        LATAbits.LATA4 = 0;
-        OC1RS = 50 * (PR2+1)/100;//right
-        LATBbits.LATB14 = 0;
-        OC3RS = 50 * (PR2+1)/100;
+        RDIR = RREV;
+        RPWM = 50 * (PR2+1)/100;//right
+        LDIR = LFOR;
+        LPWM = 50 * (PR2+1)/100;
      }
 }
 }
