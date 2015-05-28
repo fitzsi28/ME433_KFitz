@@ -122,7 +122,7 @@ DDPCONbits.JTAGEN = 0;
 
     int val;
 
-    while (1) {
+    
     _CP0_SET_COUNT(0); // set core timer to 0, remember it counts at half the CPU clock
     LATBINV = 0x80; // invert  pin B7
 
@@ -187,6 +187,8 @@ DDPCONbits.JTAGEN = 0;
         LDIR = LFOR;
         LPWM = 50 * (PR2+1)/100;
      }
-}
+   RPWM = 0;
+   LPWM = 0;
+
 }
 
