@@ -333,17 +333,9 @@ UsedLibrary="/home/kt-fitz/eagle-5.12.0/lbr/zetex.lbr"
 UsedLibrary="/home/kt-fitz/eagle-5.12.0/lbr/zilog.lbr"
 
 [Win_1]
-Type="CAM Processor"
-Loc="1975 513 2574 1041"
-State=2
-Number=4
-File="ME433_proto_board.brd"
-Job="/home/kt-fitz/ME433_2015/Seeed_Gerber_Generater_2-layer.cam"
-
-[Win_2]
 Type="Board Editor"
-Loc="2330 14 2929 413"
-State=1
+Loc="2330 24 2929 423"
+State=3
 Number=1
 File="ME433_proto_board.brd"
 View="-12134 -12134 512358 512358"
@@ -379,9 +371,9 @@ AddLevel=2
 PadsSameType=0
 Layer=1
 
-[Win_3]
+[Win_2]
 Type="Control Panel"
-Loc="108 177 1453 989"
+Loc="1975 24 2574 423"
 State=2
 Number=0
 
@@ -389,4 +381,3 @@ Number=0
 Screen="3840 1080"
 Window="Win_1"
 Window="Win_2"
-Window="Win_3"
