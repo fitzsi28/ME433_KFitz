@@ -1,0 +1,27 @@
+Encoder-SPI SS1-Pin69(D9)  SS2-Pin14(G9/CTS3)
+isense-Analog input AN15(B15)
+
+motor- ISR timer 2 to update PWM-interrupts at 5kHz
+	Timer3
+	OutputCompare OC1 uses Timer3 to run PWM and 20kHz
+
+Current Gains
+Kp=0.21
+ki=0.105
+
+Position Gains
+
+Kp=0.5
+Ki=0.4 or 0.375
+Kd=23
+
+For write-up step
+Kp=1
+Ki=0.25
+Kd=25
+
+For write-up cubic
+Kp=2
+Ki=0.3
+Kd=10
+
